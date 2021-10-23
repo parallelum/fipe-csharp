@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Br.Com.Parallelum.Fipe", "src\Br.Com.Parallelum.Fipe\Br.Com.Parallelum.Fipe.csproj", "{8C5C0BBE-2BE5-4F9A-B08A-B22DB4F53BAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Br.Com.Parallelum.Fipe.Test", "src\Br.Com.Parallelum.Fipe.Test\Br.Com.Parallelum.Fipe.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C5C0BBE-2BE5-4F9A-B08A-B22DB4F53BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C5C0BBE-2BE5-4F9A-B08A-B22DB4F53BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C5C0BBE-2BE5-4F9A-B08A-B22DB4F53BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C5C0BBE-2BE5-4F9A-B08A-B22DB4F53BAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,20 @@
+image: Visual Studio 2019
+clone_depth: 1
+build_script:
+- dotnet build -c Release
+- dotnet test -c Release
+after_build:
+- dotnet pack .\src\Br.Com.Parallelum.Fipe\Br.Com.Parallelum.Fipe.csproj -o .\artifacts -c Release --no-build
+
+artifacts:
+- path: .\artifacts\**\*.nupkg
+  name: NuGet
+
+deploy:
+  provider: NuGet
+  api_key:
+    secure: trdFQHcNcMcwDxXZOo6uak4CMfQeIaA6JvWFcaprvtIEnpqwnkCoEuy7HfjuCZRF
+  skip_symbols: true
+  artifact: /.*(\.|\.s)nupkg/
+  on:
+    branch: master

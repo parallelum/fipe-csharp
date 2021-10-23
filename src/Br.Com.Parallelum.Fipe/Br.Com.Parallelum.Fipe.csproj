@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Br.Com.Parallelum.Fipe</AssemblyName>
+    <PackageId>Br.Com.Parallelum.Fipe</PackageId>
+    <OutputType>Library</OutputType>
+    <Authors>Deivid Fortuna</Authors>
+    <Company>Parallelum</Company>
+    <AssemblyTitle>FIPE API SDK</AssemblyTitle>
+    <Description>A library generated for Fipe SDK</Description>
+    <Copyright>No Copyright</Copyright>
+    <RootNamespace>Br.Com.Parallelum.Fipe</RootNamespace>
+    <Version>1.0.3</Version>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Br.Com.Parallelum.Fipe.xml</DocumentationFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/parallelum/fipe-csharp.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>Minor update</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSubTypes" Version="1.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="Polly" Version="7.2.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+</Project>
