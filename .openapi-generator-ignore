@@ -24,6 +24,5 @@
 
 appveyor.yml
 .gitignore
-README.md
 
 **/Br.Com.Parallelum.Fipe.csproj

@@ -1,7 +1,7 @@
 /*
  * Fipe API
  *
- * API de Consulta Tabela FIPE fornece preços médios de veículos no mercado nacional. Atualizada mensalmente com dados extraidos da tabela FIPE <p>Essa API Fipe utiliza banco de dados próprio, onde todas as requisições acontecem internamente, sem sobrecarregar o Web Service da Fipe, evitando assim bloqueios por múltiplos acessos.<p/> <p>A API está online desde 2015 e totalmente gratuíta. Gostaria que ele continuasse gratuíta? O que acha de me pagar uma cerveja? 🍺<p/> [![Make a donation](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUPMYWH6XAC5G) <br><br> <h3>Available SDKs</h3> [Fipe Go SDK](https://pkg.go.dev/github.com/parallelum/fipe-go) <br> [Fipe .NetCore Nuget](https://www.nuget.org/packages/Br.Com.Parallelum.Fipe/)
+ * API de Consulta Tabela FIPE fornece preços médios de veículos no mercado nacional. Atualizada mensalmente com dados extraidos da tabela FIPE.    Essa API Fipe utiliza banco de dados próprio, onde todas as requisições acontecem internamente, sem sobrecarregar o Web Service da Fipe, evitando assim bloqueios por múltiplos acessos.    A API está online desde 2015 e totalmente gratuíta. Gostaria que ele continuasse gratuíta? O que acha de me pagar uma cerveja? 🍺    [![Make a donation](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUPMYWH6XAC5G)   ## Available SDKs  * [Fipe Go SDK](https://pkg.go.dev/github.com/parallelum/fipe-go)  * [Fipe .NetCore Nuget SDK](https://www.nuget.org/packages/Br.Com.Parallelum.Fipe/)  * [Fipe Javascript SDK](https://github.com/deividfortuna/fipe-promise)  
  *
  * The version of the OpenAPI document: 2.0.0
  * Contact: deividfortuna@gmail.com
@@ -32,7 +32,7 @@ namespace Br.Com.Parallelum.Fipe.Client
         /// Version of the package.
         /// </summary>
         /// <value>Version of the package.</value>
-        public const string Version = "1.0.1";
+        public const string Version = "1.0.4";
 
         /// <summary>
         /// Identifier for ISO 8601 DateTime Format
@@ -102,7 +102,7 @@ namespace Br.Com.Parallelum.Fipe.Client
         public Configuration()
         {
             Proxy = null;
-            UserAgent = "OpenAPI-Generator/1.0.1/csharp";
+            UserAgent = "OpenAPI-Generator/1.0.4/csharp";
             BasePath = "https://parallelum.com.br/fipe/api/v2";
             DefaultHeaders = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
@@ -453,7 +453,7 @@ namespace Br.Com.Parallelum.Fipe.Client
             report += "    OS: " + System.Environment.OSVersion + "\n";
             report += "    .NET Framework Version: " + System.Environment.Version  + "\n";
             report += "    Version of the API: 2.0.0\n";
-            report += "    SDK Package Version: 1.0.1\n";
+            report += "    SDK Package Version: 1.0.4\n";
 
             return report;
         }
