@@ -1,7 +1,7 @@
 /*
  * Fipe API
  *
- * API de Consulta Tabela FIPE fornece preços médios de veículos no mercado nacional. Atualizada mensalmente com dados extraidos da tabela FIPE.    Essa API Fipe utiliza banco de dados próprio, onde todas as requisições acontecem internamente, sem sobrecarregar o Web Service da Fipe, evitando assim bloqueios por múltiplos acessos.    A API está online desde 2015 e totalmente gratuíta. Gostaria que ele continuasse gratuíta? O que acha de me pagar uma cerveja? 🍺    [![Make a donation](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUPMYWH6XAC5G)   ## Available SDKs  * [Fipe Go SDK](https://pkg.go.dev/github.com/parallelum/fipe-go)  * [Fipe .NetCore Nuget SDK](https://www.nuget.org/packages/Br.Com.Parallelum.Fipe/)  * [Fipe Javascript SDK](https://github.com/deividfortuna/fipe-promise)  
+ * API de Consulta Tabela FIPE fornece preços médios de veículos no mercado nacional. Atualizada mensalmente com dados extraidos da tabela FIPE.    Essa API Fipe utiliza banco de dados próprio, onde todas as requisições acontecem internamente, sem sobrecarregar o Web Service da Fipe, evitando assim bloqueios por múltiplos acessos.    A API está online desde 2015 e totalmente gratuíta. Gostaria que ele continuasse gratuíta? O que acha de me pagar uma cerveja? 🍺    [![Make a donation](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUPMYWH6XAC5G)   ### Fipe API SDKs  - [Fipe Go SDK](https://pkg.go.dev/github.com/parallelum/fipe-go)  - [Fipe .NetCore Nuget SDK](https://www.nuget.org/packages/Br.Com.Parallelum.Fipe/)  - [Fipe Javascript SDK](https://github.com/deividfortuna/fipe-promise)  
  *
  * The version of the OpenAPI document: 2.0.0
  * Contact: deividfortuna@gmail.com
@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Mime;
 using Br.Com.Parallelum.Fipe.Client;
 using Br.Com.Parallelum.Fipe.Model;
@@ -78,6 +79,56 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <returns>ApiResponse of FipeResult</returns>
         ApiResponse<FipeResult> GetFipeInfoWithHttpInfo(VehiclesType vehicleType, int brandId, int modelId, string yearId, int? reference = default(int?));
         /// <summary>
+        /// Fipe price history by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns the price history for the vehicle (price estimation)
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <returns>List&lt;FipeHistoryResult&gt;</returns>
+        List<FipeHistoryResult> GetHistoryByFipeCode(VehiclesType vehicleType, string fipeCode, string yearId);
+
+        /// <summary>
+        /// Fipe price history by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns the price history for the vehicle (price estimation)
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <returns>ApiResponse of List&lt;FipeHistoryResult&gt;</returns>
+        ApiResponse<List<FipeHistoryResult>> GetHistoryByFipeCodeWithHttpInfo(VehiclesType vehicleType, string fipeCode, string yearId);
+        /// <summary>
+        /// Fipe info by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns the Fipe information for the vehicle (price estimation)
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <returns>FipeResult</returns>
+        FipeResult GetInfoByFipeCode(VehiclesType vehicleType, string fipeCode, string yearId);
+
+        /// <summary>
+        /// Fipe info by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns the Fipe information for the vehicle (price estimation)
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <returns>ApiResponse of FipeResult</returns>
+        ApiResponse<FipeResult> GetInfoByFipeCodeWithHttpInfo(VehiclesType vehicleType, string fipeCode, string yearId);
+        /// <summary>
         /// Models by brand
         /// </summary>
         /// <remarks>
@@ -120,7 +171,7 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <returns>ApiResponse of List&lt;Reference&gt;</returns>
         ApiResponse<List<Reference>> GetReferencesWithHttpInfo();
         /// <summary>
-        /// Years for model
+        /// Years by model
         /// </summary>
         /// <remarks>
         /// Returns years for the specific model
@@ -133,7 +184,7 @@ namespace Br.Com.Parallelum.Fipe.Api
         List<NamedCode> GetYearByModel(VehiclesType vehicleType, int brandId, int modelId);
 
         /// <summary>
-        /// Years for model
+        /// Years by model
         /// </summary>
         /// <remarks>
         /// Returns years for the specific model
@@ -144,6 +195,29 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <param name="modelId">Model of the vehicle</param>
         /// <returns>ApiResponse of List&lt;NamedCode&gt;</returns>
         ApiResponse<List<NamedCode>> GetYearByModelWithHttpInfo(VehiclesType vehicleType, int brandId, int modelId);
+        /// <summary>
+        /// Years by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns years available for vehicle by fipe code
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <returns>List&lt;NamedCode&gt;</returns>
+        List<NamedCode> GetYearsByFipeCode(VehiclesType vehicleType, string fipeCode);
+
+        /// <summary>
+        /// Years by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns years available for vehicle by fipe code
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <returns>ApiResponse of List&lt;NamedCode&gt;</returns>
+        ApiResponse<List<NamedCode>> GetYearsByFipeCodeWithHttpInfo(VehiclesType vehicleType, string fipeCode);
         #endregion Synchronous Operations
     }
 
@@ -208,6 +282,60 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <returns>Task of ApiResponse (FipeResult)</returns>
         System.Threading.Tasks.Task<ApiResponse<FipeResult>> GetFipeInfoWithHttpInfoAsync(VehiclesType vehicleType, int brandId, int modelId, string yearId, int? reference = default(int?), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
+        /// Fipe price history by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns the price history for the vehicle (price estimation)
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;FipeHistoryResult&gt;</returns>
+        System.Threading.Tasks.Task<List<FipeHistoryResult>> GetHistoryByFipeCodeAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Fipe price history by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns the price history for the vehicle (price estimation)
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;FipeHistoryResult&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<FipeHistoryResult>>> GetHistoryByFipeCodeWithHttpInfoAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Fipe info by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns the Fipe information for the vehicle (price estimation)
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of FipeResult</returns>
+        System.Threading.Tasks.Task<FipeResult> GetInfoByFipeCodeAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Fipe info by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns the Fipe information for the vehicle (price estimation)
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (FipeResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<FipeResult>> GetInfoByFipeCodeWithHttpInfoAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
         /// Models by brand
         /// </summary>
         /// <remarks>
@@ -254,7 +382,7 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <returns>Task of ApiResponse (List&lt;Reference&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Reference>>> GetReferencesWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Years for model
+        /// Years by model
         /// </summary>
         /// <remarks>
         /// Returns years for the specific model
@@ -268,7 +396,7 @@ namespace Br.Com.Parallelum.Fipe.Api
         System.Threading.Tasks.Task<List<NamedCode>> GetYearByModelAsync(VehiclesType vehicleType, int brandId, int modelId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Years for model
+        /// Years by model
         /// </summary>
         /// <remarks>
         /// Returns years for the specific model
@@ -280,6 +408,31 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;NamedCode&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<NamedCode>>> GetYearByModelWithHttpInfoAsync(VehiclesType vehicleType, int brandId, int modelId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Years by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns years available for vehicle by fipe code
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;NamedCode&gt;</returns>
+        System.Threading.Tasks.Task<List<NamedCode>> GetYearsByFipeCodeAsync(VehiclesType vehicleType, string fipeCode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Years by Fipe code
+        /// </summary>
+        /// <remarks>
+        /// Returns years available for vehicle by fipe code
+        /// </remarks>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;NamedCode&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<NamedCode>>> GetYearsByFipeCodeWithHttpInfoAsync(VehiclesType vehicleType, string fipeCode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -294,12 +447,14 @@ namespace Br.Com.Parallelum.Fipe.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class FipeApi : IFipeApi
+    public partial class FipeApi : IDisposable, IFipeApi
     {
         private Br.Com.Parallelum.Fipe.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FipeApi"/> class.
+        /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
+        /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
         /// </summary>
         /// <returns></returns>
         public FipeApi() : this((string)null)
@@ -308,7 +463,11 @@ namespace Br.Com.Parallelum.Fipe.Api
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FipeApi"/> class.
+        /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
+        /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
         /// </summary>
+        /// <param name="basePath">The target service's base path in URL format.</param>
+        /// <exception cref="ArgumentException"></exception>
         /// <returns></returns>
         public FipeApi(string basePath)
         {
@@ -316,16 +475,19 @@ namespace Br.Com.Parallelum.Fipe.Api
                 Br.Com.Parallelum.Fipe.Client.GlobalConfiguration.Instance,
                 new Br.Com.Parallelum.Fipe.Client.Configuration { BasePath = basePath }
             );
-            this.Client = new Br.Com.Parallelum.Fipe.Client.ApiClient(this.Configuration.BasePath);
-            this.AsynchronousClient = new Br.Com.Parallelum.Fipe.Client.ApiClient(this.Configuration.BasePath);
+            this.ApiClient = new Br.Com.Parallelum.Fipe.Client.ApiClient(this.Configuration.BasePath);
+            this.Client =  this.ApiClient;
+            this.AsynchronousClient = this.ApiClient;
             this.ExceptionFactory = Br.Com.Parallelum.Fipe.Client.Configuration.DefaultExceptionFactory;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FipeApi"/> class
-        /// using Configuration object
+        /// Initializes a new instance of the <see cref="FipeApi"/> class using Configuration object.
+        /// **IMPORTANT** This will also create an instance of HttpClient, which is less than ideal.
+        /// It's better to reuse the <see href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests#issues-with-the-original-httpclient-class-available-in-net">HttpClient and HttpClientHandler</see>.
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of Configuration.</param>
+        /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         public FipeApi(Br.Com.Parallelum.Fipe.Client.Configuration configuration)
         {
@@ -335,8 +497,78 @@ namespace Br.Com.Parallelum.Fipe.Api
                 Br.Com.Parallelum.Fipe.Client.GlobalConfiguration.Instance,
                 configuration
             );
-            this.Client = new Br.Com.Parallelum.Fipe.Client.ApiClient(this.Configuration.BasePath);
-            this.AsynchronousClient = new Br.Com.Parallelum.Fipe.Client.ApiClient(this.Configuration.BasePath);
+            this.ApiClient = new Br.Com.Parallelum.Fipe.Client.ApiClient(this.Configuration.BasePath);
+            this.Client = this.ApiClient;
+            this.AsynchronousClient = this.ApiClient;
+            ExceptionFactory = Br.Com.Parallelum.Fipe.Client.Configuration.DefaultExceptionFactory;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FipeApi"/> class.
+        /// </summary>
+        /// <param name="client">An instance of HttpClient.</param>
+        /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        /// <remarks>
+        /// Some configuration settings will not be applied without passing an HttpClientHandler.
+        /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
+        /// </remarks>
+        public FipeApi(HttpClient client, HttpClientHandler handler = null) : this(client, (string)null, handler)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FipeApi"/> class.
+        /// </summary>
+        /// <param name="client">An instance of HttpClient.</param>
+        /// <param name="basePath">The target service's base path in URL format.</param>
+        /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <returns></returns>
+        /// <remarks>
+        /// Some configuration settings will not be applied without passing an HttpClientHandler.
+        /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
+        /// </remarks>
+        public FipeApi(HttpClient client, string basePath, HttpClientHandler handler = null)
+        {
+            if (client == null) throw new ArgumentNullException("client");
+
+            this.Configuration = Br.Com.Parallelum.Fipe.Client.Configuration.MergeConfigurations(
+                Br.Com.Parallelum.Fipe.Client.GlobalConfiguration.Instance,
+                new Br.Com.Parallelum.Fipe.Client.Configuration { BasePath = basePath }
+            );
+            this.ApiClient = new Br.Com.Parallelum.Fipe.Client.ApiClient(client, this.Configuration.BasePath, handler);
+            this.Client =  this.ApiClient;
+            this.AsynchronousClient = this.ApiClient;
+            this.ExceptionFactory = Br.Com.Parallelum.Fipe.Client.Configuration.DefaultExceptionFactory;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FipeApi"/> class using Configuration object.
+        /// </summary>
+        /// <param name="client">An instance of HttpClient.</param>
+        /// <param name="configuration">An instance of Configuration.</param>
+        /// <param name="handler">An optional instance of HttpClientHandler that is used by HttpClient.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        /// <remarks>
+        /// Some configuration settings will not be applied without passing an HttpClientHandler.
+        /// The features affected are: Setting and Retrieving Cookies, Client Certificates, Proxy settings.
+        /// </remarks>
+        public FipeApi(HttpClient client, Br.Com.Parallelum.Fipe.Client.Configuration configuration, HttpClientHandler handler = null)
+        {
+            if (configuration == null) throw new ArgumentNullException("configuration");
+            if (client == null) throw new ArgumentNullException("client");
+
+            this.Configuration = Br.Com.Parallelum.Fipe.Client.Configuration.MergeConfigurations(
+                Br.Com.Parallelum.Fipe.Client.GlobalConfiguration.Instance,
+                configuration
+            );
+            this.ApiClient = new Br.Com.Parallelum.Fipe.Client.ApiClient(client, this.Configuration.BasePath, handler);
+            this.Client = this.ApiClient;
+            this.AsynchronousClient = this.ApiClient;
             ExceptionFactory = Br.Com.Parallelum.Fipe.Client.Configuration.DefaultExceptionFactory;
         }
 
@@ -347,6 +579,7 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <param name="client">The client interface for synchronous API access.</param>
         /// <param name="asyncClient">The client interface for asynchronous API access.</param>
         /// <param name="configuration">The configuration object.</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public FipeApi(Br.Com.Parallelum.Fipe.Client.ISynchronousClient client, Br.Com.Parallelum.Fipe.Client.IAsynchronousClient asyncClient, Br.Com.Parallelum.Fipe.Client.IReadableConfiguration configuration)
         {
             if (client == null) throw new ArgumentNullException("client");
@@ -358,6 +591,19 @@ namespace Br.Com.Parallelum.Fipe.Api
             this.Configuration = configuration;
             this.ExceptionFactory = Br.Com.Parallelum.Fipe.Client.Configuration.DefaultExceptionFactory;
         }
+
+        /// <summary>
+        /// Disposes resources if they were created by us
+        /// </summary>
+        public void Dispose()
+        {
+            this.ApiClient?.Dispose();
+        }
+
+        /// <summary>
+        /// Holds the ApiClient if created
+        /// </summary>
+        public Br.Com.Parallelum.Fipe.Client.ApiClient ApiClient { get; set; } = null;
 
         /// <summary>
         /// The client for accessing this underlying API asynchronously.
@@ -653,6 +899,276 @@ namespace Br.Com.Parallelum.Fipe.Api
         }
 
         /// <summary>
+        /// Fipe price history by Fipe code Returns the price history for the vehicle (price estimation)
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <returns>List&lt;FipeHistoryResult&gt;</returns>
+        public List<FipeHistoryResult> GetHistoryByFipeCode(VehiclesType vehicleType, string fipeCode, string yearId)
+        {
+            Br.Com.Parallelum.Fipe.Client.ApiResponse<List<FipeHistoryResult>> localVarResponse = GetHistoryByFipeCodeWithHttpInfo(vehicleType, fipeCode, yearId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Fipe price history by Fipe code Returns the price history for the vehicle (price estimation)
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <returns>ApiResponse of List&lt;FipeHistoryResult&gt;</returns>
+        public Br.Com.Parallelum.Fipe.Client.ApiResponse<List<FipeHistoryResult>> GetHistoryByFipeCodeWithHttpInfo(VehiclesType vehicleType, string fipeCode, string yearId)
+        {
+            // verify the required parameter 'fipeCode' is set
+            if (fipeCode == null)
+                throw new Br.Com.Parallelum.Fipe.Client.ApiException(400, "Missing required parameter 'fipeCode' when calling FipeApi->GetHistoryByFipeCode");
+
+            // verify the required parameter 'yearId' is set
+            if (yearId == null)
+                throw new Br.Com.Parallelum.Fipe.Client.ApiException(400, "Missing required parameter 'yearId' when calling FipeApi->GetHistoryByFipeCode");
+
+            Br.Com.Parallelum.Fipe.Client.RequestOptions localVarRequestOptions = new Br.Com.Parallelum.Fipe.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("vehicleType", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(vehicleType)); // path parameter
+            localVarRequestOptions.PathParameters.Add("fipeCode", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(fipeCode)); // path parameter
+            localVarRequestOptions.PathParameters.Add("yearId", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(yearId)); // path parameter
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<List<FipeHistoryResult>>("/{vehicleType}/{fipeCode}/years/{yearId}/history", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetHistoryByFipeCode", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Fipe price history by Fipe code Returns the price history for the vehicle (price estimation)
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;FipeHistoryResult&gt;</returns>
+        public async System.Threading.Tasks.Task<List<FipeHistoryResult>> GetHistoryByFipeCodeAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            Br.Com.Parallelum.Fipe.Client.ApiResponse<List<FipeHistoryResult>> localVarResponse = await GetHistoryByFipeCodeWithHttpInfoAsync(vehicleType, fipeCode, yearId, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Fipe price history by Fipe code Returns the price history for the vehicle (price estimation)
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;FipeHistoryResult&gt;)</returns>
+        public async System.Threading.Tasks.Task<Br.Com.Parallelum.Fipe.Client.ApiResponse<List<FipeHistoryResult>>> GetHistoryByFipeCodeWithHttpInfoAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'fipeCode' is set
+            if (fipeCode == null)
+                throw new Br.Com.Parallelum.Fipe.Client.ApiException(400, "Missing required parameter 'fipeCode' when calling FipeApi->GetHistoryByFipeCode");
+
+            // verify the required parameter 'yearId' is set
+            if (yearId == null)
+                throw new Br.Com.Parallelum.Fipe.Client.ApiException(400, "Missing required parameter 'yearId' when calling FipeApi->GetHistoryByFipeCode");
+
+
+            Br.Com.Parallelum.Fipe.Client.RequestOptions localVarRequestOptions = new Br.Com.Parallelum.Fipe.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("vehicleType", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(vehicleType)); // path parameter
+            localVarRequestOptions.PathParameters.Add("fipeCode", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(fipeCode)); // path parameter
+            localVarRequestOptions.PathParameters.Add("yearId", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(yearId)); // path parameter
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<FipeHistoryResult>>("/{vehicleType}/{fipeCode}/years/{yearId}/history", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetHistoryByFipeCode", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Fipe info by Fipe code Returns the Fipe information for the vehicle (price estimation)
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <returns>FipeResult</returns>
+        public FipeResult GetInfoByFipeCode(VehiclesType vehicleType, string fipeCode, string yearId)
+        {
+            Br.Com.Parallelum.Fipe.Client.ApiResponse<FipeResult> localVarResponse = GetInfoByFipeCodeWithHttpInfo(vehicleType, fipeCode, yearId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Fipe info by Fipe code Returns the Fipe information for the vehicle (price estimation)
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <returns>ApiResponse of FipeResult</returns>
+        public Br.Com.Parallelum.Fipe.Client.ApiResponse<FipeResult> GetInfoByFipeCodeWithHttpInfo(VehiclesType vehicleType, string fipeCode, string yearId)
+        {
+            // verify the required parameter 'fipeCode' is set
+            if (fipeCode == null)
+                throw new Br.Com.Parallelum.Fipe.Client.ApiException(400, "Missing required parameter 'fipeCode' when calling FipeApi->GetInfoByFipeCode");
+
+            // verify the required parameter 'yearId' is set
+            if (yearId == null)
+                throw new Br.Com.Parallelum.Fipe.Client.ApiException(400, "Missing required parameter 'yearId' when calling FipeApi->GetInfoByFipeCode");
+
+            Br.Com.Parallelum.Fipe.Client.RequestOptions localVarRequestOptions = new Br.Com.Parallelum.Fipe.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("vehicleType", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(vehicleType)); // path parameter
+            localVarRequestOptions.PathParameters.Add("fipeCode", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(fipeCode)); // path parameter
+            localVarRequestOptions.PathParameters.Add("yearId", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(yearId)); // path parameter
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<FipeResult>("/{vehicleType}/{fipeCode}/years/{yearId}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetInfoByFipeCode", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Fipe info by Fipe code Returns the Fipe information for the vehicle (price estimation)
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of FipeResult</returns>
+        public async System.Threading.Tasks.Task<FipeResult> GetInfoByFipeCodeAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            Br.Com.Parallelum.Fipe.Client.ApiResponse<FipeResult> localVarResponse = await GetInfoByFipeCodeWithHttpInfoAsync(vehicleType, fipeCode, yearId, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Fipe info by Fipe code Returns the Fipe information for the vehicle (price estimation)
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="yearId">Year for the vehicle</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (FipeResult)</returns>
+        public async System.Threading.Tasks.Task<Br.Com.Parallelum.Fipe.Client.ApiResponse<FipeResult>> GetInfoByFipeCodeWithHttpInfoAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'fipeCode' is set
+            if (fipeCode == null)
+                throw new Br.Com.Parallelum.Fipe.Client.ApiException(400, "Missing required parameter 'fipeCode' when calling FipeApi->GetInfoByFipeCode");
+
+            // verify the required parameter 'yearId' is set
+            if (yearId == null)
+                throw new Br.Com.Parallelum.Fipe.Client.ApiException(400, "Missing required parameter 'yearId' when calling FipeApi->GetInfoByFipeCode");
+
+
+            Br.Com.Parallelum.Fipe.Client.RequestOptions localVarRequestOptions = new Br.Com.Parallelum.Fipe.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("vehicleType", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(vehicleType)); // path parameter
+            localVarRequestOptions.PathParameters.Add("fipeCode", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(fipeCode)); // path parameter
+            localVarRequestOptions.PathParameters.Add("yearId", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(yearId)); // path parameter
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<FipeResult>("/{vehicleType}/{fipeCode}/years/{yearId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetInfoByFipeCode", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Models by brand Returns models for the brand
         /// </summary>
         /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
@@ -867,7 +1383,7 @@ namespace Br.Com.Parallelum.Fipe.Api
         }
 
         /// <summary>
-        /// Years for model Returns years for the specific model
+        /// Years by model Returns years for the specific model
         /// </summary>
         /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="vehicleType">Type of vehicle</param>
@@ -881,7 +1397,7 @@ namespace Br.Com.Parallelum.Fipe.Api
         }
 
         /// <summary>
-        /// Years for model Returns years for the specific model
+        /// Years by model Returns years for the specific model
         /// </summary>
         /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="vehicleType">Type of vehicle</param>
@@ -924,7 +1440,7 @@ namespace Br.Com.Parallelum.Fipe.Api
         }
 
         /// <summary>
-        /// Years for model Returns years for the specific model
+        /// Years by model Returns years for the specific model
         /// </summary>
         /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="vehicleType">Type of vehicle</param>
@@ -939,7 +1455,7 @@ namespace Br.Com.Parallelum.Fipe.Api
         }
 
         /// <summary>
-        /// Years for model Returns years for the specific model
+        /// Years by model Returns years for the specific model
         /// </summary>
         /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="vehicleType">Type of vehicle</param>
@@ -979,6 +1495,127 @@ namespace Br.Com.Parallelum.Fipe.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetYearByModel", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Years by Fipe code Returns years available for vehicle by fipe code
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <returns>List&lt;NamedCode&gt;</returns>
+        public List<NamedCode> GetYearsByFipeCode(VehiclesType vehicleType, string fipeCode)
+        {
+            Br.Com.Parallelum.Fipe.Client.ApiResponse<List<NamedCode>> localVarResponse = GetYearsByFipeCodeWithHttpInfo(vehicleType, fipeCode);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Years by Fipe code Returns years available for vehicle by fipe code
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <returns>ApiResponse of List&lt;NamedCode&gt;</returns>
+        public Br.Com.Parallelum.Fipe.Client.ApiResponse<List<NamedCode>> GetYearsByFipeCodeWithHttpInfo(VehiclesType vehicleType, string fipeCode)
+        {
+            // verify the required parameter 'fipeCode' is set
+            if (fipeCode == null)
+                throw new Br.Com.Parallelum.Fipe.Client.ApiException(400, "Missing required parameter 'fipeCode' when calling FipeApi->GetYearsByFipeCode");
+
+            Br.Com.Parallelum.Fipe.Client.RequestOptions localVarRequestOptions = new Br.Com.Parallelum.Fipe.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("vehicleType", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(vehicleType)); // path parameter
+            localVarRequestOptions.PathParameters.Add("fipeCode", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(fipeCode)); // path parameter
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<List<NamedCode>>("/{vehicleType}/{fipeCode}/years", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetYearsByFipeCode", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Years by Fipe code Returns years available for vehicle by fipe code
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;NamedCode&gt;</returns>
+        public async System.Threading.Tasks.Task<List<NamedCode>> GetYearsByFipeCodeAsync(VehiclesType vehicleType, string fipeCode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            Br.Com.Parallelum.Fipe.Client.ApiResponse<List<NamedCode>> localVarResponse = await GetYearsByFipeCodeWithHttpInfoAsync(vehicleType, fipeCode, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Years by Fipe code Returns years available for vehicle by fipe code
+        /// </summary>
+        /// <exception cref="Br.Com.Parallelum.Fipe.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="vehicleType">Type of vehicle</param>
+        /// <param name="fipeCode">Fipe internal reference code</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;NamedCode&gt;)</returns>
+        public async System.Threading.Tasks.Task<Br.Com.Parallelum.Fipe.Client.ApiResponse<List<NamedCode>>> GetYearsByFipeCodeWithHttpInfoAsync(VehiclesType vehicleType, string fipeCode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'fipeCode' is set
+            if (fipeCode == null)
+                throw new Br.Com.Parallelum.Fipe.Client.ApiException(400, "Missing required parameter 'fipeCode' when calling FipeApi->GetYearsByFipeCode");
+
+
+            Br.Com.Parallelum.Fipe.Client.RequestOptions localVarRequestOptions = new Br.Com.Parallelum.Fipe.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = Br.Com.Parallelum.Fipe.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("vehicleType", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(vehicleType)); // path parameter
+            localVarRequestOptions.PathParameters.Add("fipeCode", Br.Com.Parallelum.Fipe.Client.ClientUtils.ParameterToString(fipeCode)); // path parameter
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<NamedCode>>("/{vehicleType}/{fipeCode}/years", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetYearsByFipeCode", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

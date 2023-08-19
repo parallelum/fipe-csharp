@@ -28,33 +28,41 @@ using OpenAPIDateConverter = Br.Com.Parallelum.Fipe.Client.OpenAPIDateConverter;
 namespace Br.Com.Parallelum.Fipe.Model
 {
     /// <summary>
-    /// NamedCode
+    /// HistoryEntry
     /// </summary>
-    [DataContract(Name = "NamedCode")]
-    public partial class NamedCode : IEquatable<NamedCode>, IValidatableObject
+    [DataContract(Name = "HistoryEntry")]
+    public partial class HistoryEntry : IEquatable<HistoryEntry>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NamedCode" /> class.
+        /// Initializes a new instance of the <see cref="HistoryEntry" /> class.
         /// </summary>
-        /// <param name="name">name.</param>
-        /// <param name="code">code.</param>
-        public NamedCode(string name = default(string), string code = default(string))
+        /// <param name="price">price.</param>
+        /// <param name="month">month.</param>
+        /// <param name="reference">reference.</param>
+        public HistoryEntry(string price = default(string), string month = default(string), string reference = default(string))
         {
-            this.Name = name;
-            this.Code = code;
+            this.Price = price;
+            this.Month = month;
+            this.Reference = reference;
         }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// Gets or Sets Price
         /// </summary>
-        [DataMember(Name = "name", EmitDefaultValue = false)]
-        public string Name { get; set; }
+        [DataMember(Name = "price", EmitDefaultValue = false)]
+        public string Price { get; set; }
 
         /// <summary>
-        /// Gets or Sets Code
+        /// Gets or Sets Month
         /// </summary>
-        [DataMember(Name = "code", EmitDefaultValue = false)]
-        public string Code { get; set; }
+        [DataMember(Name = "month", EmitDefaultValue = false)]
+        public string Month { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Reference
+        /// </summary>
+        [DataMember(Name = "reference", EmitDefaultValue = false)]
+        public string Reference { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -63,9 +71,10 @@ namespace Br.Com.Parallelum.Fipe.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class NamedCode {\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Code: ").Append(Code).Append("\n");
+            sb.Append("class HistoryEntry {\n");
+            sb.Append("  Price: ").Append(Price).Append("\n");
+            sb.Append("  Month: ").Append(Month).Append("\n");
+            sb.Append("  Reference: ").Append(Reference).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -86,15 +95,15 @@ namespace Br.Com.Parallelum.Fipe.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as NamedCode);
+            return this.Equals(input as HistoryEntry);
         }
 
         /// <summary>
-        /// Returns true if NamedCode instances are equal
+        /// Returns true if HistoryEntry instances are equal
         /// </summary>
-        /// <param name="input">Instance of NamedCode to be compared</param>
+        /// <param name="input">Instance of HistoryEntry to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(NamedCode input)
+        public bool Equals(HistoryEntry input)
         {
             if (input == null)
             {
@@ -102,14 +111,19 @@ namespace Br.Com.Parallelum.Fipe.Model
             }
             return 
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    this.Price == input.Price ||
+                    (this.Price != null &&
+                    this.Price.Equals(input.Price))
                 ) && 
                 (
-                    this.Code == input.Code ||
-                    (this.Code != null &&
-                    this.Code.Equals(input.Code))
+                    this.Month == input.Month ||
+                    (this.Month != null &&
+                    this.Month.Equals(input.Month))
+                ) && 
+                (
+                    this.Reference == input.Reference ||
+                    (this.Reference != null &&
+                    this.Reference.Equals(input.Reference))
                 );
         }
 
@@ -122,13 +136,17 @@ namespace Br.Com.Parallelum.Fipe.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Name != null)
+                if (this.Price != null)
                 {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Price.GetHashCode();
                 }
-                if (this.Code != null)
+                if (this.Month != null)
                 {
-                    hashCode = (hashCode * 59) + this.Code.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Month.GetHashCode();
+                }
+                if (this.Reference != null)
+                {
+                    hashCode = (hashCode * 59) + this.Reference.GetHashCode();
                 }
                 return hashCode;
             }

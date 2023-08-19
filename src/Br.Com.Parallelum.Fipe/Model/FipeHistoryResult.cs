@@ -28,42 +28,33 @@ using OpenAPIDateConverter = Br.Com.Parallelum.Fipe.Client.OpenAPIDateConverter;
 namespace Br.Com.Parallelum.Fipe.Model
 {
     /// <summary>
-    /// FipeResult
+    /// FipeHistoryResult
     /// </summary>
-    [DataContract(Name = "FipeResult")]
-    public partial class FipeResult : IEquatable<FipeResult>, IValidatableObject
+    [DataContract(Name = "FipeHistoryResult")]
+    public partial class FipeHistoryResult : IEquatable<FipeHistoryResult>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FipeResult" /> class.
+        /// Initializes a new instance of the <see cref="FipeHistoryResult" /> class.
         /// </summary>
-        /// <param name="price">Price in Brazilian Real.</param>
         /// <param name="brand">Brand of the vehicle.</param>
         /// <param name="model">Model of the vehicle.</param>
         /// <param name="modelYear">Year of vehicle production.</param>
         /// <param name="fuel">Fuel used by the vehicle.</param>
         /// <param name="codeFipe">Unique Fipe identifier.</param>
-        /// <param name="referenceMonth">Month of the price.</param>
         /// <param name="vehicleType">Type of the vehicle.</param>
         /// <param name="fuelAcronym">Fuel acronym (eg. G).</param>
-        public FipeResult(string price = default(string), string brand = default(string), string model = default(string), int modelYear = default(int), string fuel = default(string), string codeFipe = default(string), string referenceMonth = default(string), int vehicleType = default(int), string fuelAcronym = default(string))
+        /// <param name="priceHistory">priceHistory.</param>
+        public FipeHistoryResult(string brand = default(string), string model = default(string), int modelYear = default(int), string fuel = default(string), string codeFipe = default(string), int vehicleType = default(int), string fuelAcronym = default(string), List<HistoryEntry> priceHistory = default(List<HistoryEntry>))
         {
-            this.Price = price;
             this.Brand = brand;
             this.Model = model;
             this.ModelYear = modelYear;
             this.Fuel = fuel;
             this.CodeFipe = codeFipe;
-            this.ReferenceMonth = referenceMonth;
             this.VehicleType = vehicleType;
             this.FuelAcronym = fuelAcronym;
+            this.PriceHistory = priceHistory;
         }
-
-        /// <summary>
-        /// Price in Brazilian Real
-        /// </summary>
-        /// <value>Price in Brazilian Real</value>
-        [DataMember(Name = "price", EmitDefaultValue = false)]
-        public string Price { get; set; }
 
         /// <summary>
         /// Brand of the vehicle
@@ -101,13 +92,6 @@ namespace Br.Com.Parallelum.Fipe.Model
         public string CodeFipe { get; set; }
 
         /// <summary>
-        /// Month of the price
-        /// </summary>
-        /// <value>Month of the price</value>
-        [DataMember(Name = "referenceMonth", EmitDefaultValue = false)]
-        public string ReferenceMonth { get; set; }
-
-        /// <summary>
         /// Type of the vehicle
         /// </summary>
         /// <value>Type of the vehicle</value>
@@ -122,22 +106,27 @@ namespace Br.Com.Parallelum.Fipe.Model
         public string FuelAcronym { get; set; }
 
         /// <summary>
+        /// Gets or Sets PriceHistory
+        /// </summary>
+        [DataMember(Name = "priceHistory", EmitDefaultValue = false)]
+        public List<HistoryEntry> PriceHistory { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class FipeResult {\n");
-            sb.Append("  Price: ").Append(Price).Append("\n");
+            sb.Append("class FipeHistoryResult {\n");
             sb.Append("  Brand: ").Append(Brand).Append("\n");
             sb.Append("  Model: ").Append(Model).Append("\n");
             sb.Append("  ModelYear: ").Append(ModelYear).Append("\n");
             sb.Append("  Fuel: ").Append(Fuel).Append("\n");
             sb.Append("  CodeFipe: ").Append(CodeFipe).Append("\n");
-            sb.Append("  ReferenceMonth: ").Append(ReferenceMonth).Append("\n");
             sb.Append("  VehicleType: ").Append(VehicleType).Append("\n");
             sb.Append("  FuelAcronym: ").Append(FuelAcronym).Append("\n");
+            sb.Append("  PriceHistory: ").Append(PriceHistory).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -158,26 +147,21 @@ namespace Br.Com.Parallelum.Fipe.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as FipeResult);
+            return this.Equals(input as FipeHistoryResult);
         }
 
         /// <summary>
-        /// Returns true if FipeResult instances are equal
+        /// Returns true if FipeHistoryResult instances are equal
         /// </summary>
-        /// <param name="input">Instance of FipeResult to be compared</param>
+        /// <param name="input">Instance of FipeHistoryResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(FipeResult input)
+        public bool Equals(FipeHistoryResult input)
         {
             if (input == null)
             {
                 return false;
             }
             return 
-                (
-                    this.Price == input.Price ||
-                    (this.Price != null &&
-                    this.Price.Equals(input.Price))
-                ) && 
                 (
                     this.Brand == input.Brand ||
                     (this.Brand != null &&
@@ -203,11 +187,6 @@ namespace Br.Com.Parallelum.Fipe.Model
                     this.CodeFipe.Equals(input.CodeFipe))
                 ) && 
                 (
-                    this.ReferenceMonth == input.ReferenceMonth ||
-                    (this.ReferenceMonth != null &&
-                    this.ReferenceMonth.Equals(input.ReferenceMonth))
-                ) && 
-                (
                     this.VehicleType == input.VehicleType ||
                     this.VehicleType.Equals(input.VehicleType)
                 ) && 
@@ -215,6 +194,12 @@ namespace Br.Com.Parallelum.Fipe.Model
                     this.FuelAcronym == input.FuelAcronym ||
                     (this.FuelAcronym != null &&
                     this.FuelAcronym.Equals(input.FuelAcronym))
+                ) && 
+                (
+                    this.PriceHistory == input.PriceHistory ||
+                    this.PriceHistory != null &&
+                    input.PriceHistory != null &&
+                    this.PriceHistory.SequenceEqual(input.PriceHistory)
                 );
         }
 
@@ -227,10 +212,6 @@ namespace Br.Com.Parallelum.Fipe.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Price != null)
-                {
-                    hashCode = (hashCode * 59) + this.Price.GetHashCode();
-                }
                 if (this.Brand != null)
                 {
                     hashCode = (hashCode * 59) + this.Brand.GetHashCode();
@@ -248,14 +229,14 @@ namespace Br.Com.Parallelum.Fipe.Model
                 {
                     hashCode = (hashCode * 59) + this.CodeFipe.GetHashCode();
                 }
-                if (this.ReferenceMonth != null)
-                {
-                    hashCode = (hashCode * 59) + this.ReferenceMonth.GetHashCode();
-                }
                 hashCode = (hashCode * 59) + this.VehicleType.GetHashCode();
                 if (this.FuelAcronym != null)
                 {
                     hashCode = (hashCode * 59) + this.FuelAcronym.GetHashCode();
+                }
+                if (this.PriceHistory != null)
+                {
+                    hashCode = (hashCode * 59) + this.PriceHistory.GetHashCode();
                 }
                 return hashCode;
             }

@@ -12,13 +12,16 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
-using RestSharp;
 using Xunit;
 
 using Br.Com.Parallelum.Fipe.Client;
 using Br.Com.Parallelum.Fipe.Api;
+using Br.Com.Parallelum.Fipe.Model;
+
 // uncomment below to import models
 //using Br.Com.Parallelum.Fipe.Model;
 
@@ -51,8 +54,7 @@ namespace Br.Com.Parallelum.Fipe.Test.Api
         [Fact]
         public void InstanceTest()
         {
-            // TODO uncomment below to test 'IsType' FipeApi
-            //Assert.IsType<FipeApi>(instance);
+            Assert.IsType<FipeApi>(instance);
         }
 
         /// <summary>
@@ -61,10 +63,8 @@ namespace Br.Com.Parallelum.Fipe.Test.Api
         [Fact]
         public void GetBrandsByTypeTest()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //VehiclesType vehicleType = null;
-            //var response = instance.GetBrandsByType(vehicleType);
-            //Assert.IsType<List<NamedCode>>(response);
+            var response = instance.GetBrandsByType(VehiclesType.Cars);
+            Assert.IsType<List<NamedCode>>(response);
         }
 
         /// <summary>
@@ -73,14 +73,8 @@ namespace Br.Com.Parallelum.Fipe.Test.Api
         [Fact]
         public void GetFipeInfoTest()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //VehiclesType vehicleType = null;
-            //int brandId = null;
-            //int modelId = null;
-            //string yearId = null;
-            //int? reference = null;
-            //var response = instance.GetFipeInfo(vehicleType, brandId, modelId, yearId, reference);
-            //Assert.IsType<FipeResult>(response);
+            var response = instance.GetFipeInfo(VehiclesType.Cars, 23, 1051, "1999-1");
+            Assert.IsType<FipeResult>(response);
         }
 
         /// <summary>
@@ -89,11 +83,9 @@ namespace Br.Com.Parallelum.Fipe.Test.Api
         [Fact]
         public void GetModelsByBrandTest()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //VehiclesType vehicleType = null;
-            //int brandId = null;
-            //var response = instance.GetModelsByBrand(vehicleType, brandId);
-            //Assert.IsType<List<NamedCode>>(response);
+            int brandId = 23;
+            var response = instance.GetModelsByBrand(VehiclesType.Cars, brandId);
+            Assert.IsType<List<NamedCode>>(response);
         }
 
         /// <summary>
@@ -102,9 +94,8 @@ namespace Br.Com.Parallelum.Fipe.Test.Api
         [Fact]
         public void GetReferencesTest()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //var response = instance.GetReferences();
-            //Assert.IsType<List<Reference>>(response);
+            var response = instance.GetReferences();
+            Assert.IsType<List<Reference>>(response);
         }
 
         /// <summary>
@@ -113,12 +104,10 @@ namespace Br.Com.Parallelum.Fipe.Test.Api
         [Fact]
         public void GetYearByModelTest()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //VehiclesType vehicleType = null;
-            //int brandId = null;
-            //int modelId = null;
-            //var response = instance.GetYearByModel(vehicleType, brandId, modelId);
-            //Assert.IsType<List<NamedCode>>(response);
+            int brandId = 23;
+            int modelId = 1051;
+            var response = instance.GetYearByModel(VehiclesType.Cars, brandId, modelId);
+            Assert.IsType<List<NamedCode>>(response);
         }
     }
 }

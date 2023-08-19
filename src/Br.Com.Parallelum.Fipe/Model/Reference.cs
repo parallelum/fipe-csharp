@@ -1,7 +1,7 @@
 /*
  * Fipe API
  *
- * API de Consulta Tabela FIPE fornece preços médios de veículos no mercado nacional. Atualizada mensalmente com dados extraidos da tabela FIPE.    Essa API Fipe utiliza banco de dados próprio, onde todas as requisições acontecem internamente, sem sobrecarregar o Web Service da Fipe, evitando assim bloqueios por múltiplos acessos.    A API está online desde 2015 e totalmente gratuíta. Gostaria que ele continuasse gratuíta? O que acha de me pagar uma cerveja? 🍺    [![Make a donation](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUPMYWH6XAC5G)   ## Available SDKs  * [Fipe Go SDK](https://pkg.go.dev/github.com/parallelum/fipe-go)  * [Fipe .NetCore Nuget SDK](https://www.nuget.org/packages/Br.Com.Parallelum.Fipe/)  * [Fipe Javascript SDK](https://github.com/deividfortuna/fipe-promise)  
+ * API de Consulta Tabela FIPE fornece preços médios de veículos no mercado nacional. Atualizada mensalmente com dados extraidos da tabela FIPE.    Essa API Fipe utiliza banco de dados próprio, onde todas as requisições acontecem internamente, sem sobrecarregar o Web Service da Fipe, evitando assim bloqueios por múltiplos acessos.    A API está online desde 2015 e totalmente gratuíta. Gostaria que ele continuasse gratuíta? O que acha de me pagar uma cerveja? 🍺    [![Make a donation](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUPMYWH6XAC5G)   ### Fipe API SDKs  - [Fipe Go SDK](https://pkg.go.dev/github.com/parallelum/fipe-go)  - [Fipe .NetCore Nuget SDK](https://www.nuget.org/packages/Br.Com.Parallelum.Fipe/)  - [Fipe Javascript SDK](https://github.com/deividfortuna/fipe-promise)  
  *
  * The version of the OpenAPI document: 2.0.0
  * Contact: deividfortuna@gmail.com
@@ -22,6 +22,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel.DataAnnotations;
+using FileParameter = Br.Com.Parallelum.Fipe.Client.FileParameter;
 using OpenAPIDateConverter = Br.Com.Parallelum.Fipe.Client.OpenAPIDateConverter;
 
 namespace Br.Com.Parallelum.Fipe.Model
@@ -61,7 +62,7 @@ namespace Br.Com.Parallelum.Fipe.Model
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            var sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.Append("class Reference {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Month: ").Append(Month).Append("\n");
@@ -96,8 +97,9 @@ namespace Br.Com.Parallelum.Fipe.Model
         public bool Equals(Reference input)
         {
             if (input == null)
+            {
                 return false;
-
+            }
             return 
                 (
                     this.Code == input.Code ||
@@ -121,9 +123,13 @@ namespace Br.Com.Parallelum.Fipe.Model
             {
                 int hashCode = 41;
                 if (this.Code != null)
-                    hashCode = hashCode * 59 + this.Code.GetHashCode();
+                {
+                    hashCode = (hashCode * 59) + this.Code.GetHashCode();
+                }
                 if (this.Month != null)
-                    hashCode = hashCode * 59 + this.Month.GetHashCode();
+                {
+                    hashCode = (hashCode * 59) + this.Month.GetHashCode();
+                }
                 return hashCode;
             }
         }

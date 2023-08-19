@@ -25,4 +25,4 @@
 appveyor.yml
 .gitignore
 
-**/Br.Com.Parallelum.Fipe.csproj
+#**/Br.Com.Parallelum.Fipe.csproj

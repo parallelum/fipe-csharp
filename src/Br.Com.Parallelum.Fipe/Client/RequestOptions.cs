@@ -1,7 +1,7 @@
 /*
  * Fipe API
  *
- * API de Consulta Tabela FIPE fornece preços médios de veículos no mercado nacional. Atualizada mensalmente com dados extraidos da tabela FIPE.    Essa API Fipe utiliza banco de dados próprio, onde todas as requisições acontecem internamente, sem sobrecarregar o Web Service da Fipe, evitando assim bloqueios por múltiplos acessos.    A API está online desde 2015 e totalmente gratuíta. Gostaria que ele continuasse gratuíta? O que acha de me pagar uma cerveja? 🍺    [![Make a donation](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUPMYWH6XAC5G)   ## Available SDKs  * [Fipe Go SDK](https://pkg.go.dev/github.com/parallelum/fipe-go)  * [Fipe .NetCore Nuget SDK](https://www.nuget.org/packages/Br.Com.Parallelum.Fipe/)  * [Fipe Javascript SDK](https://github.com/deividfortuna/fipe-promise)  
+ * API de Consulta Tabela FIPE fornece preços médios de veículos no mercado nacional. Atualizada mensalmente com dados extraidos da tabela FIPE.    Essa API Fipe utiliza banco de dados próprio, onde todas as requisições acontecem internamente, sem sobrecarregar o Web Service da Fipe, evitando assim bloqueios por múltiplos acessos.    A API está online desde 2015 e totalmente gratuíta. Gostaria que ele continuasse gratuíta? O que acha de me pagar uma cerveja? 🍺    [![Make a donation](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QUPMYWH6XAC5G)   ### Fipe API SDKs  - [Fipe Go SDK](https://pkg.go.dev/github.com/parallelum/fipe-go)  - [Fipe .NetCore Nuget SDK](https://www.nuget.org/packages/Br.Com.Parallelum.Fipe/)  - [Fipe Javascript SDK](https://github.com/deividfortuna/fipe-promise)  
  *
  * The version of the OpenAPI document: 2.0.0
  * Contact: deividfortuna@gmail.com
@@ -34,7 +34,7 @@ namespace Br.Com.Parallelum.Fipe.Client
         public Multimap<string, string> QueryParameters { get; set; }
 
         /// <summary>
-        /// Header parameters to be applied to to the request.
+        /// Header parameters to be applied to the request.
         /// Keys may have 1 or more values associated.
         /// </summary>
         public Multimap<string, string> HeaderParameters { get; set; }
@@ -47,7 +47,7 @@ namespace Br.Com.Parallelum.Fipe.Client
         /// <summary>
         /// File parameters to be sent along with the request.
         /// </summary>
-        public Dictionary<string, Stream> FileParameters { get; set; }
+        public Multimap<string, FileParameter> FileParameters { get; set; }
 
         /// <summary>
         /// Cookies to be sent along with the request.
@@ -68,7 +68,7 @@ namespace Br.Com.Parallelum.Fipe.Client
             QueryParameters = new Multimap<string, string>();
             HeaderParameters = new Multimap<string, string>();
             FormParameters = new Dictionary<string, string>();
-            FileParameters = new Dictionary<string, Stream>();
+            FileParameters = new Multimap<string, FileParameter>();
             Cookies = new List<Cookie>();
         }
     }
