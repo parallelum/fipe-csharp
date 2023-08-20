@@ -349,9 +349,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/FipeHistoryResult'
-                type: array
+                $ref: '#/components/schemas/FipeHistoryResult'
           description: Ok
         "404":
           content: {}

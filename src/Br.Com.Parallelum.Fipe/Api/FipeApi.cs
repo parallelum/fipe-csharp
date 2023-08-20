@@ -88,8 +88,8 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <param name="vehicleType">Type of vehicle</param>
         /// <param name="fipeCode">Fipe internal reference code</param>
         /// <param name="yearId">Year for the vehicle</param>
-        /// <returns>List&lt;FipeHistoryResult&gt;</returns>
-        List<FipeHistoryResult> GetHistoryByFipeCode(VehiclesType vehicleType, string fipeCode, string yearId);
+        /// <returns>FipeHistoryResult</returns>
+        FipeHistoryResult GetHistoryByFipeCode(VehiclesType vehicleType, string fipeCode, string yearId);
 
         /// <summary>
         /// Fipe price history by Fipe code
@@ -101,8 +101,8 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <param name="vehicleType">Type of vehicle</param>
         /// <param name="fipeCode">Fipe internal reference code</param>
         /// <param name="yearId">Year for the vehicle</param>
-        /// <returns>ApiResponse of List&lt;FipeHistoryResult&gt;</returns>
-        ApiResponse<List<FipeHistoryResult>> GetHistoryByFipeCodeWithHttpInfo(VehiclesType vehicleType, string fipeCode, string yearId);
+        /// <returns>ApiResponse of FipeHistoryResult</returns>
+        ApiResponse<FipeHistoryResult> GetHistoryByFipeCodeWithHttpInfo(VehiclesType vehicleType, string fipeCode, string yearId);
         /// <summary>
         /// Fipe info by Fipe code
         /// </summary>
@@ -292,8 +292,8 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <param name="fipeCode">Fipe internal reference code</param>
         /// <param name="yearId">Year for the vehicle</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;FipeHistoryResult&gt;</returns>
-        System.Threading.Tasks.Task<List<FipeHistoryResult>> GetHistoryByFipeCodeAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of FipeHistoryResult</returns>
+        System.Threading.Tasks.Task<FipeHistoryResult> GetHistoryByFipeCodeAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Fipe price history by Fipe code
@@ -306,8 +306,8 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <param name="fipeCode">Fipe internal reference code</param>
         /// <param name="yearId">Year for the vehicle</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;FipeHistoryResult&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<FipeHistoryResult>>> GetHistoryByFipeCodeWithHttpInfoAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (FipeHistoryResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<FipeHistoryResult>> GetHistoryByFipeCodeWithHttpInfoAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Fipe info by Fipe code
         /// </summary>
@@ -905,10 +905,10 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <param name="vehicleType">Type of vehicle</param>
         /// <param name="fipeCode">Fipe internal reference code</param>
         /// <param name="yearId">Year for the vehicle</param>
-        /// <returns>List&lt;FipeHistoryResult&gt;</returns>
-        public List<FipeHistoryResult> GetHistoryByFipeCode(VehiclesType vehicleType, string fipeCode, string yearId)
+        /// <returns>FipeHistoryResult</returns>
+        public FipeHistoryResult GetHistoryByFipeCode(VehiclesType vehicleType, string fipeCode, string yearId)
         {
-            Br.Com.Parallelum.Fipe.Client.ApiResponse<List<FipeHistoryResult>> localVarResponse = GetHistoryByFipeCodeWithHttpInfo(vehicleType, fipeCode, yearId);
+            Br.Com.Parallelum.Fipe.Client.ApiResponse<FipeHistoryResult> localVarResponse = GetHistoryByFipeCodeWithHttpInfo(vehicleType, fipeCode, yearId);
             return localVarResponse.Data;
         }
 
@@ -919,8 +919,8 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <param name="vehicleType">Type of vehicle</param>
         /// <param name="fipeCode">Fipe internal reference code</param>
         /// <param name="yearId">Year for the vehicle</param>
-        /// <returns>ApiResponse of List&lt;FipeHistoryResult&gt;</returns>
-        public Br.Com.Parallelum.Fipe.Client.ApiResponse<List<FipeHistoryResult>> GetHistoryByFipeCodeWithHttpInfo(VehiclesType vehicleType, string fipeCode, string yearId)
+        /// <returns>ApiResponse of FipeHistoryResult</returns>
+        public Br.Com.Parallelum.Fipe.Client.ApiResponse<FipeHistoryResult> GetHistoryByFipeCodeWithHttpInfo(VehiclesType vehicleType, string fipeCode, string yearId)
         {
             // verify the required parameter 'fipeCode' is set
             if (fipeCode == null)
@@ -952,7 +952,7 @@ namespace Br.Com.Parallelum.Fipe.Api
 
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<List<FipeHistoryResult>>("/{vehicleType}/{fipeCode}/years/{yearId}/history", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<FipeHistoryResult>("/{vehicleType}/{fipeCode}/years/{yearId}/history", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
@@ -971,10 +971,10 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <param name="fipeCode">Fipe internal reference code</param>
         /// <param name="yearId">Year for the vehicle</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;FipeHistoryResult&gt;</returns>
-        public async System.Threading.Tasks.Task<List<FipeHistoryResult>> GetHistoryByFipeCodeAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of FipeHistoryResult</returns>
+        public async System.Threading.Tasks.Task<FipeHistoryResult> GetHistoryByFipeCodeAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            Br.Com.Parallelum.Fipe.Client.ApiResponse<List<FipeHistoryResult>> localVarResponse = await GetHistoryByFipeCodeWithHttpInfoAsync(vehicleType, fipeCode, yearId, cancellationToken).ConfigureAwait(false);
+            Br.Com.Parallelum.Fipe.Client.ApiResponse<FipeHistoryResult> localVarResponse = await GetHistoryByFipeCodeWithHttpInfoAsync(vehicleType, fipeCode, yearId, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -986,8 +986,8 @@ namespace Br.Com.Parallelum.Fipe.Api
         /// <param name="fipeCode">Fipe internal reference code</param>
         /// <param name="yearId">Year for the vehicle</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;FipeHistoryResult&gt;)</returns>
-        public async System.Threading.Tasks.Task<Br.Com.Parallelum.Fipe.Client.ApiResponse<List<FipeHistoryResult>>> GetHistoryByFipeCodeWithHttpInfoAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (FipeHistoryResult)</returns>
+        public async System.Threading.Tasks.Task<Br.Com.Parallelum.Fipe.Client.ApiResponse<FipeHistoryResult>> GetHistoryByFipeCodeWithHttpInfoAsync(VehiclesType vehicleType, string fipeCode, string yearId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'fipeCode' is set
             if (fipeCode == null)
@@ -1022,7 +1022,7 @@ namespace Br.Com.Parallelum.Fipe.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.GetAsync<List<FipeHistoryResult>>("/{vehicleType}/{fipeCode}/years/{yearId}/history", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<FipeHistoryResult>("/{vehicleType}/{fipeCode}/years/{yearId}/history", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

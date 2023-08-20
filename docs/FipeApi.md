@@ -215,7 +215,7 @@ No authorization required
 
 <a id="gethistorybyfipecode"></a>
 # **GetHistoryByFipeCode**
-> List&lt;FipeHistoryResult&gt; GetHistoryByFipeCode (VehiclesType vehicleType, string fipeCode, string yearId)
+> FipeHistoryResult GetHistoryByFipeCode (VehiclesType vehicleType, string fipeCode, string yearId)
 
 Fipe price history by Fipe code
 
@@ -249,7 +249,7 @@ namespace Example
             try
             {
                 // Fipe price history by Fipe code
-                List<FipeHistoryResult> result = apiInstance.GetHistoryByFipeCode(vehicleType, fipeCode, yearId);
+                FipeHistoryResult result = apiInstance.GetHistoryByFipeCode(vehicleType, fipeCode, yearId);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -270,7 +270,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Fipe price history by Fipe code
-    ApiResponse<List<FipeHistoryResult>> response = apiInstance.GetHistoryByFipeCodeWithHttpInfo(vehicleType, fipeCode, yearId);
+    ApiResponse<FipeHistoryResult> response = apiInstance.GetHistoryByFipeCodeWithHttpInfo(vehicleType, fipeCode, yearId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -293,7 +293,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**List&lt;FipeHistoryResult&gt;**](FipeHistoryResult.md)
+[**FipeHistoryResult**](FipeHistoryResult.md)
 
 ### Authorization
 

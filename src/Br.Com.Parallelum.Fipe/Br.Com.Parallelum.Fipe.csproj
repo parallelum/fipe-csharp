@@ -12,12 +12,12 @@
     <Description>A SDK library generated for Fipe API</Description>
     <Copyright>No Copyright</Copyright>
     <RootNamespace>Br.Com.Parallelum.Fipe</RootNamespace>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Br.Com.Parallelum.Fipe.xml</DocumentationFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/parallelum/fipe-csharp.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>Updated documentation</PackageReleaseNotes>
+    <PackageReleaseNotes>Minor update</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>tabela fipe api deividfortuna c-sharp sdk</PackageTags>
   </PropertyGroup>

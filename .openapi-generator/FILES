@@ -9,7 +9,6 @@ docs/NamedCode.md
 docs/Reference.md
 docs/VehiclesType.md
 git_push.sh
-src/Br.Com.Parallelum.Fipe.Test/Api/FipeApiTests.cs
 src/Br.Com.Parallelum.Fipe.Test/Br.Com.Parallelum.Fipe.Test.csproj
 src/Br.Com.Parallelum.Fipe/Api/FipeApi.cs
 src/Br.Com.Parallelum.Fipe/Br.Com.Parallelum.Fipe.csproj
